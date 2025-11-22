@@ -2,14 +2,13 @@ import express from "express";
 import cors from 'cors'
 import { adminRouter } from "./Routes/AdminRoute.js";
 import { EmployeeRouter } from "./Routes/EmployeeRoute.js";
-import { LeaveRouter } from "./Routes/LeaveRoute.js";
 import Jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
 const app = express() 
 app.use(cors({
   origin: ["http://localhost:5173", "http://localhost:5174"],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true,
   optionsSuccessStatus: 200 // ✅ handle legacy browsers and preflight OK
 }));
@@ -17,7 +16,6 @@ app.use(express.json())
 app.use(cookieParser())
 app.use('/auth', adminRouter)
 app.use('/employee', EmployeeRouter)
-app.use('/leave', LeaveRouter)
 app.use(express.static('Public'))
 
 const verifyUser = (req, res, next) => {

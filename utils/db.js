@@ -1,19 +1,18 @@
-import mysql from 'mysql'
+import mysql from 'mysql2'
 
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "root",
     database: "employeems"
 })
 
-con.connect(function(err) {
-    if(err) {
-        console.log("connection error")
+con.connect((err) => {
+    if (err) {
+        console.log("Connection error:", err.message)
     } else {
-        console.log("Connected")
+        console.log("Connected to MySQL")
     }
 })
 
-export default con;
-
+export default con
